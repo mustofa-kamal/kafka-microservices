@@ -44,12 +44,12 @@ public class TripEventConsumer {
             boolean driverExists = driverRepo.existsById(tripDto.getDriverId());
 
             if (!riderExists || !driverExists) {
-                System.out.println("❌ Invalid TripEvent: Missing rider or driver. Skipping tripId " + tripDto.getTripId());
+                System.out.println("❌ Invalid TripEvent: Missing rider or driver. Skipping tripId ");
                 return;
             }
 
             TripEntity trip = TripEntity.builder()
-                    .tripId(tripDto.getTripId())
+                    // .tripId(...) ← don't include this
                     .riderId(tripDto.getRiderId())
                     .driverId(tripDto.getDriverId())
                     .pickupLocation(tripDto.getPickupLocation())
@@ -59,8 +59,9 @@ public class TripEventConsumer {
                     .status(tripDto.getStatus())
                     .build();
 
+
             tripRepo.save(trip);
-            System.out.println("✅ Trip saved: " + trip);
+            System.out.println("✅ Trip saved with auto-generated tripId:");
 
         } catch (Exception e) {
             e.printStackTrace();

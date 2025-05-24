@@ -4,6 +4,8 @@ import com.example.tripservice.kafka.dto.TripDto;
 import com.example.tripservice.kafka.producer.TripEventProducer;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/trip-events")
 public class TripEventController {
@@ -17,6 +19,6 @@ public class TripEventController {
     @PostMapping
     public String sendTripEvent(@RequestBody TripDto event) {
         producer.sendTripEvent(event);
-        return "✅ Trip event sent for tripId: " + event.getTripId();
+        return "✅ Trip event published successfully";
     }
 }

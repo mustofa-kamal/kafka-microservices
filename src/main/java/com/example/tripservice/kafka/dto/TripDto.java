@@ -3,10 +3,11 @@ package com.example.tripservice.kafka.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 public class TripDto {
-    private Long tripId;
+
     private Long riderId;
     private Long driverId;
 

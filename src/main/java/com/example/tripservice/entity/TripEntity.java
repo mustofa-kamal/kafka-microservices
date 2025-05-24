@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,10 @@ import java.time.LocalDateTime;
 public class TripEntity {
 
     @Id
-    private Long tripId;
+    @GeneratedValue
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID tripId;
+
 
     private Long riderId;
     private Long driverId;
