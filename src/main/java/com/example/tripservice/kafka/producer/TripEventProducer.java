@@ -25,11 +25,11 @@ public class TripEventProducer {
     public void sendTripEvent(TripDto event) {
         try {
             String json = objectMapper.writeValueAsString(event);
-            kafkaTemplate.send("trip-events-v2", String.valueOf(event.getRiderId()), json);
-
-            System.out.println("✅ Trip event sent for tripId: " );
+            kafkaTemplate.send("trip-events-v2", event.getTripId().toString(), json);
+            System.out.println("✅ Trip event sent for tripId: " + event.getTripId());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

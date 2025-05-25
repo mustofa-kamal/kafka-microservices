@@ -2,7 +2,7 @@ package com.example.tripservice.kafka.consumer;
 
 import com.example.tripservice.entity.DriverEntity;
 import com.example.tripservice.kafka.dto.DriverDto;
-import com.example.tripservice.repository.DriverInfoRepository;
+import com.example.tripservice.repository.DriverEntityRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class DriverEventConsumer {
 
-    private final DriverInfoRepository driverRepo;
+    private final DriverEntityRepository driverRepo;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public DriverEventConsumer(DriverInfoRepository driverRepo) {
+    public DriverEventConsumer(DriverEntityRepository driverRepo) {
         this.driverRepo = driverRepo;
     }
 
