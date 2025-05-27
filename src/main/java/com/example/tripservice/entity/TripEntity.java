@@ -14,7 +14,7 @@ import java.util.UUID;
 public class TripEntity {
 
     @Id
-    @GeneratedValue
+
     @Column(columnDefinition = "BINARY(16)")
     private UUID tripId;
 

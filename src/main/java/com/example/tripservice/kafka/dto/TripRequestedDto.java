@@ -12,6 +12,7 @@ import java.util.UUID;
 public class TripRequestedDto {
     private UUID tripId;
     private Long riderId;
+    private Long driverId; // ✅ newly added
     private String pickupLocation;
     private String dropoffLocation;
 }
