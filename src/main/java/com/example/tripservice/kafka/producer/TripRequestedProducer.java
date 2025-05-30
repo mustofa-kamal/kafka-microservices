@@ -13,11 +13,9 @@ public class TripRequestedProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
-    public TripRequestedProducer(KafkaTemplate<String, String> kafkaTemplate) {
+    public TripRequestedProducer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
-        this.objectMapper = new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        this.objectMapper = objectMapper;
     }
 
     public void sendTripRequested(TripRequestedDto event) {

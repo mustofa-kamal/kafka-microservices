@@ -2,6 +2,7 @@ package com.example.tripservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,29 +11,36 @@ import java.util.UUID;
 @Table(name = "trip_status_history")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TripStatusHistoryEntity {
 
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(columnDefinition = "BINARY(16)", nullable = false)
     private UUID tripId;
 
     private Long riderId;
     private Long driverId;
+
+
     private String pickupLocation;
     private String dropoffLocation;
-    private LocalDateTime requestedTime;
-    private LocalDateTime startedTime;
-    private LocalDateTime completedTime;
 
-    @Column(nullable = false)
-    private String status;
+    private LocalDateTime requestedPickupTime;// when request was made
+    private LocalDateTime driverAssignedTime; // 🆕 when driver is assigned
+    private LocalDateTime actualPickupTime;   // 🆕 when trip starts
+    private LocalDateTime estimatedDropoffTime;// estimated dropoff time
+    private LocalDateTime actualDropoffTime;  // when trip completes
 
-    @Column(nullable = false)
-    private LocalDateTime timestamp;
+
+
+
+    @Enumerated(EnumType.STRING)
+    private Status tripStatus;
+
+    @CreationTimestamp
+    private LocalDateTime statusUpdatedAt;
 }

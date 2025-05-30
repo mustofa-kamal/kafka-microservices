@@ -1,5 +1,6 @@
 package com.example.tripservice.controller;
 
+import com.example.tripservice.entity.Status;
 import com.example.tripservice.kafka.dto.TripDto;
 import com.example.tripservice.kafka.producer.TripEventProducer;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,15 @@ public class TripEventController {
 
     @PostMapping
     public String createTrip(@RequestBody TripDto dto) {
-        UUID tripId = UUID.randomUUID();  // ✅ Generate UUID in controller
+        UUID tripId = dto.getTripId()==null?UUID.randomUUID():dto.getTripId();
         dto.setTripId(tripId);
-        dto.setStatus("REQUESTED"); // or any default
-        dto.setStartTime(LocalDateTime.now());
+
+        dto.setRequestedPickupTime(LocalDateTime.now());
+
+        // For learning/testing, we can hardcode estimatedDropoffTime if not set
+        if (dto.getEstimatedDropoffTime() == null) {
+            dto.setEstimatedDropoffTime(dto.getRequestedPickupTime().plusMinutes(30));
+        }
 
         tripEventProducer.sendTripEvent(dto);
         return "Trip requested with tripId: " + tripId;

@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TripStatusHistoryRepository extends JpaRepository<TripStatusHistoryEntity, UUID> {
-    List<TripStatusHistoryEntity> findByTripIdOrderByTimestamp(UUID tripId);
+    List<TripStatusHistoryEntity> findByTripId(UUID tripId);
 }
+
