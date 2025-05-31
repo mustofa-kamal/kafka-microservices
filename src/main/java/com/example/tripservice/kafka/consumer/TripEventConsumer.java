@@ -62,7 +62,7 @@ public class TripEventConsumer {
         System.out.println("🚀 New trip created with tripId: " + newTrip.getTripId());
     }
 
-    private void updateTrip(TripDto dto) {
+    private void updateTrip(TripDto dto){
         Optional<TripEntity> optional = tripRepo.findById(dto.getTripId());
         if (optional.isEmpty()) {
             System.out.println("❌ Trip not found: " + dto.getTripId());
@@ -74,10 +74,11 @@ public class TripEventConsumer {
 
         switch (dto.getTripStatus()) {
             case DRIVER_ASSIGNED -> {
+
                 entity.setDriverId(dto.getDriverId());
                 entity.setDriverAssignedTime(dto.getDriverAssignedTime());
             }
-            case STARTED -> entity.setActualPickupTime(dto.getActualPickupTime());
+            case STARTED ->  entity.setActualPickupTime(dto.getActualPickupTime());
             case COMPLETED -> entity.setActualDropoffTime(dto.getActualDropoffTime());
             case CANCELLED -> {
                 entity.setCancellationReason(dto.getCancellationReason());

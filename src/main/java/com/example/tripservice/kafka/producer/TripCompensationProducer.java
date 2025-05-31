@@ -1,5 +1,6 @@
 package com.example.tripservice.kafka.producer;
 
+import com.example.tripservice.entity.Status;
 import com.example.tripservice.kafka.dto.TripCompensationDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,9 +19,9 @@ public class TripCompensationProducer {
         this.objectMapper = objectMapper;
     }
 
-    public void sendCompensation(UUID tripId, Enum<?> rollbackTo, String reason) {
+    public void sendCompensation(UUID tripId, Status rollbackTo, String reason) {
         try {
-            TripCompensationDto dto = new TripCompensationDto(tripId, rollbackTo.name(), reason);
+            TripCompensationDto dto = new TripCompensationDto(tripId, rollbackTo, reason);
             String json = objectMapper.writeValueAsString(dto);
             kafkaTemplate.send("trip-events-compensate", tripId.toString(), json);
             System.out.println("🛠️ Compensation event sent: " + dto);

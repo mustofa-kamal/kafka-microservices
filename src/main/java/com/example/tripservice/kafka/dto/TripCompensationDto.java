@@ -1,8 +1,7 @@
 package com.example.tripservice.kafka.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.tripservice.entity.Status;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -11,6 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TripCompensationDto {
     private UUID tripId;
-    private String revertToStatus;  // ✅ use String instead of Status
+    private Status revertToStatus;
     private String reason;
 }
