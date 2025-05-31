@@ -35,6 +35,10 @@ public class TripStatusHistoryEntity {
     private LocalDateTime estimatedDropoffTime;// estimated dropoff time
     private LocalDateTime actualDropoffTime;  // when trip completes
 
+    private String cancellationReason;
+    private String cancelledBy;
+
+
 
 
 

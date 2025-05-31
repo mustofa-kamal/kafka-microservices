@@ -37,6 +37,9 @@ public class TripEntity {
     @CreationTimestamp
     private LocalDateTime statusUpdatedAt;
 
+    private String cancellationReason;
+    private String cancelledBy;
+
 
 
 }

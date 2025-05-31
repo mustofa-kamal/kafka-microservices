@@ -30,6 +30,23 @@ public class TripEventController {
             dto.setEstimatedDropoffTime(dto.getRequestedPickupTime().plusMinutes(30));
         }
 
+        if (dto.getTripStatus() == Status.DRIVER_ASSIGNED){
+            dto.setDriverAssignedTime(LocalDateTime.now());
+        }
+
+        if (dto.getTripStatus() == Status.STARTED) {
+            dto.setActualPickupTime(LocalDateTime.now());
+        }
+
+
+        if (dto.getTripStatus() == Status.COMPLETED){
+            dto.setActualDropoffTime(LocalDateTime.now());
+        }
+
+
+
+
+
         tripEventProducer.sendTripEvent(dto);
         return "Trip requested with tripId: " + tripId;
     }

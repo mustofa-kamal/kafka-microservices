@@ -18,12 +18,13 @@ public class TripDto {
     private String pickupLocation;
     private String dropoffLocation;
 
-    private LocalDateTime requestedPickupTime;
-    private LocalDateTime actualPickupTime;
+    private LocalDateTime requestedPickupTime;// when request was made
+    private LocalDateTime driverAssignedTime; // 🆕 when driver is assigned
+    private LocalDateTime actualPickupTime;   // 🆕 when trip starts
+    private LocalDateTime estimatedDropoffTime;// estimated dropoff time
+    private LocalDateTime actualDropoffTime;  // when trip completes
 
 
-    private LocalDateTime estimatedDropoffTime;
-    private LocalDateTime actualDropoffTime;
 
 
     @Enumerated(EnumType.STRING)
@@ -31,4 +32,8 @@ public class TripDto {
 
     @CreationTimestamp
     private LocalDateTime statusUpdatedAt;
+
+    // 🆕 Cancellation info
+    private String cancellationReason;
+    private String cancelledBy;
 }
