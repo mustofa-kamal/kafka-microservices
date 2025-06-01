@@ -30,7 +30,7 @@ public class TripProjectionConsumer {
     }
 
     // 🔹 Handles trip creation from controller
-    @KafkaListener(topics = "trip-events-v2", groupId = "trip-view-service")
+    //@KafkaListener(topics = "trip-events-v2", groupId = "trip-view-service")
     public void handleTripEvent(String message) {
         try {
             TripDto tripDto = objectMapper.readValue(message, TripDto.class);
@@ -58,7 +58,7 @@ public class TripProjectionConsumer {
     }
 
     // 🔹 Handles status updates (REQUESTED → DRIVER_ASSIGNED → STARTED, etc.)
-    @KafkaListener(topics = "trip-status-events", groupId = "trip-view-service")
+    //@KafkaListener(topics = "trip-status-events", groupId = "trip-view-service")
     public void handleStatusChange(String message) {
         try {
             TripStatusDto statusDto = objectMapper.readValue(message, TripStatusDto.class);

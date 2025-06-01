@@ -4,6 +4,8 @@ public enum Status {
     REQUESTED,
     DRIVER_ASSIGNED,
     STARTED,
-    COMPLETED,
-    CANCELLED
+    COMPLETED,             // Normal end of trip
+    COMPLETED_DISPUTED,    // Rider says "No" to trip completion
+    REFUNDED,              // Refund issued
+    CANCELLED              // Cancelled at any stage before completion
 }
