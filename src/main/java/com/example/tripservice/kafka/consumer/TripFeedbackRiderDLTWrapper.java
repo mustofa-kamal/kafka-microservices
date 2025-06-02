@@ -27,8 +27,7 @@ public class TripFeedbackRiderDLTWrapper {
     public void safeConsume(String message) {
         try {
             TripFeedbackDto dto = objectMapper.readValue(message, TripFeedbackDto.class);
-            throw new RuntimeException("💥 Simulated failure for testing DLT");
-            //tripFeedbackRider.consumeFeedback(dto);
+            tripFeedbackRider.consumeFeedback(dto);
         } catch (Exception e) {
             System.err.println("❌ Failed to process feedback, sending to DLT: " + e.getMessage());
             kafkaTemplate.send("trip-feedback-dlt", message);
