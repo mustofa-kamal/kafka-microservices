@@ -35,10 +35,10 @@ public class TripFeedbackRider {
     }
 
 
-    @KafkaListener(topics = "trip-feedback-rider-events", groupId = "trip-feedback-group")
-    public void consumeFeedback(String message) {
+    //@KafkaListener(topics = "trip-feedback-rider-events", groupId = "trip-feedback-group")
+    public void consumeFeedback(TripFeedbackDto feedback) {
         try {
-            TripFeedbackDto feedback = objectMapper.readValue(message, TripFeedbackDto.class);
+            //TripFeedbackDto feedback = objectMapper.readValue(message, TripFeedbackDto.class);
             Optional<TripEntity> optional = tripRepo.findById(feedback.getTripId());
             if (optional.isEmpty()) {
                 System.out.println("❌ Feedback received for unknown trip: " + feedback.getTripId());
@@ -51,6 +51,11 @@ public class TripFeedbackRider {
                 System.out.println("✅ Rider confirmed trip completion: " + feedback.getTripId());
                 // No state change, trip stays COMPLETED
             } else {
+                if (trip.getTripStatus() != Status.COMPLETED) {
+                    System.out.println("⚠️ Trip is not in COMPLETED state. Duplicate or invalid dispute: " + feedback.getTripId());
+                    return;
+                }
+
                 System.out.println("🚫 Rider disputed trip: " + feedback.getTripId());
                 trip.setTripStatus(Status.COMPLETED_DISPUTED);
                 tripRepo.save(trip);
