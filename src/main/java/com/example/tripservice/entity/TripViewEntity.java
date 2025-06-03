@@ -1,6 +1,7 @@
 package com.example.tripservice.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 

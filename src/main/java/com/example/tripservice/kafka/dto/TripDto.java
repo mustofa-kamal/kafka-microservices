@@ -1,8 +1,10 @@
 package com.example.tripservice.kafka.dto;
 
 import com.example.tripservice.entity.Status;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
